@@ -1,0 +1,23 @@
+{
+    "name": "fanmade/laravel-nanoid",
+    "description": "A small package to add Nano IDs to Laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Fanmade\\LaravelNanoid\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ben Reuter",
+            "email": "ben@fanmade.de"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "10.x-dev"
+    }
+}

@@ -1,1 +1,1 @@
-# laravel-nanoid
+# Laravel NanoID

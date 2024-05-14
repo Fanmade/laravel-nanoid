@@ -53,7 +53,8 @@
     "require-dev": {
         "orchestra/testbench": "^9.0",
         "pestphp/pest": "3.x-dev",
-        "pestphp/pest-plugin-laravel": "3.x-dev"
+        "pestphp/pest-plugin-laravel": "3.x-dev",
+        "phpstan/phpstan": "^1.11"
     },
     "config": {
         "allow-plugins": {

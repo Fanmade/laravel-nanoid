@@ -9,8 +9,14 @@ use Throwable;
 
 class NanoIDException extends Exception
 {
+    /**
+     * @var array<string, int|string>
+     */
     private array $context = [];
 
+    /**
+     * @param array<string, int|string> $context
+     */
     public static function fromException(Throwable $exception, array $context = []): self
     {
         $nanoIDException = new self($exception->getMessage(), $exception->getCode(), $exception);
@@ -21,6 +27,9 @@ class NanoIDException extends Exception
         return $nanoIDException;
     }
 
+    /**
+     * @param array<string, int|string> $context
+     */
     public function withContext(array $context): self
     {
         $this->context = $context;
@@ -46,13 +55,16 @@ class NanoIDException extends Exception
         return $nanoIDException;
     }
 
-    public function addContext(string $key, mixed $value): self
+    public function addContext(string $key, int|string $value): self
     {
         $this->context[$key] = $value;
 
         return $this;
     }
 
+    /**
+     * @return array<string, int|string>
+     */
     public function getContext(): array
     {
         return $this->context;

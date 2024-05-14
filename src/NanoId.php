@@ -9,26 +9,25 @@ use Fanmade\NanoId\Contracts\ValidatorInterface;
 class NanoId
 {
     private GeneratorInterface $generator;
-    private int $length;
-
-    private string $symbols;
+    private int $size;
+    private string $alphabet;
 
     public function __construct(
         GeneratorInterface $generator = null,
-        int $length = null,
-        string $symbols = null,
+        int $size = null,
+        string $alphabet = null,
         private ?ValidatorInterface $validator = null
     )
     {
         $this->generator = $generator ?? app(GeneratorInterface::class);
-        $this->length = $length ?? config('nano-id.length');
-        $this->symbols = $symbols ?? config('nano-id.symbols');
+        $this->size = $size ?? config('nano-id.size');
+        $this->alphabet = $alphabet ?? config('nano-id.alphabet');
     }
 
     public function generate(int $length = null, string $symbols = null): string
     {
-        $length = $length ?? $this->length;
-        $symbols = $symbols ?? $this->symbols;
+        $length = (int) $length > 0 ? $length : $this->size;
+        $symbols = $symbols ?? $this->alphabet;
         $alphabetLength = strlen($symbols);
         $mask = (2 << (int) log(($alphabetLength - 1) * 6, 2)) - 1;
         $step = (int) ceil(1.6 * $mask * $length / $alphabetLength);

@@ -11,7 +11,7 @@ return [
      * If you set the suffix "abc_" and a length of six, the result might look like this: "123:abc"
      */
     'suffix' => '',
-    'length' => 21,
-    'symbols' => '_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    'size' => 21,
+    'alphabet' => '_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     'generator' => \Fanmade\NanoId\Generator::class,
 ];

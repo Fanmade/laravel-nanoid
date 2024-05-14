@@ -35,7 +35,9 @@ class NanoId implements Stringable
         $step = (int) ceil(1.6 * $mask * $length / $alphabetLength);
         $prefix = config('nano-id.prefix', '');
         $suffix = config('nano-id.suffix', '');
-        if (strlen("$prefix$suffix") >= $length) {
+        $prefixLength = config('nano-id.include_prefix_in_length', true) ? strlen($prefix) : 0;
+        $suffixLength = config('nano-id.include_suffix_in_length', true) ? strlen($suffix) : 0;
+        if ($prefixLength + $suffixLength >= $length) {
             throw NanoIdException::prefixSuffixTooLong($length, $prefix, $suffix);
         }
 
@@ -48,7 +50,7 @@ class NanoId implements Stringable
                 }
                 $nanoId .= $symbols[$byte];
 
-                if (strlen($nanoId) < $length) {
+                if ((strlen($nanoId) + $prefixLength + $suffixLength) < $length) {
                     continue;
                 }
 

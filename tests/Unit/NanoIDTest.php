@@ -131,5 +131,25 @@ it ('can be cast to a string', function () {
     $id = (string) $generator;
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(21);
+        ->and(strlen($id))->toBe(config('nano-id.size'));
+});
+
+it ('allow configuring if the prefix should be excluded in the length', function () {
+    config()->set('nano-id.prefix', 'prefix-');
+    config()->set('nano-id.include_prefix_in_length', false);
+    $id = nano_id(30);
+
+    expect($id)->toBeString()
+        ->and(strlen($id))->toBe(37)
+        ->and($id)->toMatch('/^prefix-[a-zA-Z0-9_-]+$/');
+});
+
+it('allow configuring if the suffix should be excluded in the length', function () {
+    config()->set('nano-id.suffix', '-suffix');
+    config()->set('nano-id.include_suffix_in_length', false);
+    $id = nano_id(30);
+
+    expect($id)->toBeString()
+        ->and(strlen($id))->toBe(37)
+        ->and($id)->toMatch('/^[a-zA-Z0-9_-]+-suffix$/');
 });

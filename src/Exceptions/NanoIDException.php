@@ -14,6 +14,14 @@ class NanoIDException extends Exception
      */
     private array $context = [];
 
+    public static function createWithContext(string $message, array $context): static
+    {
+        $nanoIDException = new static($message);
+        $nanoIDException->context = $context;
+
+        return $nanoIDException;
+    }
+
     /**
      * @param array<string, int|string> $context
      */

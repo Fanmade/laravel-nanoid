@@ -3,65 +3,50 @@ declare(strict_types=1);
 
 namespace Fanmade\NanoId;
 
-use Fanmade\NanoId\Contracts\GeneratorInterface;
+use Fanmade\NanoId\Contracts\RandomStringGenerator;
 use Fanmade\NanoId\Contracts\ValidatorInterface;
 use Fanmade\NanoId\Exceptions\NanoIDException;
 use Stringable;
+use function config;
+use function strlen;
 
 class NanoID implements Stringable
 {
-    private GeneratorInterface $generator;
+    private RandomStringGenerator $generator;
     private int $size;
     private string $alphabet;
 
     public function __construct(
-        GeneratorInterface $generator = null,
+        RandomStringGenerator $generator = null,
         int $size = null,
         string $alphabet = null,
         private ?ValidatorInterface $validator = null
     )
     {
-        $this->generator = $generator ?? app(GeneratorInterface::class);
-        $this->size = $size ?? (int)config('nano-id.size', 21);
+        $this->generator = $generator ?? app(RandomStringGenerator::class);
+        $this->size = $size ?? (int) config('nano-id.size', 21);
         $this->alphabet = $alphabet ?? config('nano-id.alphabet');
     }
 
     public function generate(int $length = null, string $symbols = null): string
     {
         $limit = (int) ($length > 0 ? $length : $this->size);
-        $symbols = $symbols ?? $this->alphabet;
-        $alphabetLength = strlen($symbols);
-        $mask = (2 << (int) log(($alphabetLength - 1) * 6, 2)) - 1;
-        $step = (int) ceil(1.6 * $mask * $limit / $alphabetLength);
         $prefix = config('nano-id.prefix', '');
         $suffix = config('nano-id.suffix', '');
         $prefixLength = config('nano-id.include_prefix_in_length', true) ? strlen($prefix) : 0;
         $suffixLength = config('nano-id.include_suffix_in_length', true) ? strlen($suffix) : 0;
-        if ($prefixLength + $suffixLength >= $limit) {
+        $idLength = $limit - $prefixLength - $suffixLength;
+        if ($idLength <= 0) {
             throw NanoIdException::prefixSuffixTooLong($limit, $prefix, $suffix);
         }
+        $symbols = $symbols ?? $this->alphabet;
 
-        $nanoId = '';
-        while (true) {
-            foreach ($this->generator->random($step) as $byte) {
-                $byte &= $mask;
-                if (!isset($symbols[$byte])) {
-                    continue;
-                }
-                $nanoId .= $symbols[$byte];
+        // Generate Nano IDs until the validator approves
+        do {
+            $id = $this->generator->random($idLength, $symbols);
+        } while (!($this->validator?->isValid($id) ?? true));
 
-                if ((strlen($nanoId) + $prefixLength + $suffixLength) < $limit) {
-                    continue;
-                }
-
-                if (!($this->validator?->isValid($nanoId) ?? true)) {
-                    $nanoId = '';
-                    continue;
-                }
-
-                return "$prefix$nanoId$suffix";
-            }
-        }
+        return "$prefix$id$suffix";
     }
 
     public function validator(ValidatorInterface $validator): self

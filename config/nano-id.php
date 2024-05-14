@@ -1,5 +1,6 @@
 <?php
 
+
 return [
     /*
      * This will be included in the calculation of the length.
@@ -15,5 +16,5 @@ return [
     'include_suffix_in_length' => true, // should the length of the suffix be included in the size limitation
     'size' => 21,
     'alphabet' => '_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    'generator' => \Fanmade\NanoId\Generator::class,
+    'generator' => \Fanmade\NanoId\Generator\HidehaloStringGenerator::class, // Choose any of the available generators in the Randomizers directory
 ];

@@ -1,6 +1,6 @@
 # Laravel NanoID (WIP)
 
-<p style="text-align: center;"><img src="/art/laravel-nano-id-logo.png" alt="Laravel Nano ID Logo" width="400"></p>
+<p align="center"><img src="/art/laravel-nano-id-logo.png" alt="Laravel Nano ID Logo" width="400"></p>
 
 ## Introduction
 A simple package to generate Nano IDs in Laravel.

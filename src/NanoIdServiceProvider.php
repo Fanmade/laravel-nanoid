@@ -18,7 +18,7 @@ class NanoIdServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->bind('nanoId', static fn() => new NanoId());
+        $this->app->bind('nanoId', static fn() => new NanoID());
         $this->app->bind(GeneratorInterface::class, static fn() => new Generator());
 
         $this->mergeConfigFrom(__DIR__ . '/../config/nano-id.php', 'nano-id');

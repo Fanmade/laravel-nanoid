@@ -1,17 +1,17 @@
 <?php
 
-use Fanmade\NanoId\NanoId;
+use Fanmade\NanoId\NanoID;
 
 it('can generate a Nano ID', function () {
-    $generator = new NanoId();
+    $generator = new NanoID();
     $id = $generator->generate();
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(21);
+        ->and(strlen($id))->toBe(config('nano-id.size'));
 });
 
 it('can be generated with a custom length', function () {
-    $generator = new NanoId();
+    $generator = new NanoID();
     $id = $generator->generate(10);
 
     expect($id)->toBeString()
@@ -19,7 +19,7 @@ it('can be generated with a custom length', function () {
 });
 
 it ('can be generated with a custom alphabet', function () {
-    $generator = new NanoId();
+    $generator = new NanoID();
     $id = $generator->generate(10, 'abc');
 
     expect($id)->toBeString()
@@ -28,17 +28,17 @@ it ('can be generated with a custom alphabet', function () {
 });
 
 it ('can be generated using the facade', function () {
-    $id = \Fanmade\NanoId\Facades\NanoId::generate();
+    $id = \Fanmade\NanoId\Facades\NanoID::generate();
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(21);
+        ->and(strlen($id))->toBe(config('nano-id.size'));
 });
 
 it ('can be generated using the helper', function () {
     $id = nano_id();
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(21);
+        ->and(strlen($id))->toBe(config('nano-id.size'));
 });
 
 it ('can be generated using the helper with a custom length', function () {
@@ -61,7 +61,7 @@ it ('can be configured to have a custom prefix', function () {
     $id = nano_id();
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(28)
+        ->and(strlen($id))->toBe(config('nano-id.size'))
         ->and($id)->toMatch('/^prefix-[a-zA-Z0-9_-]+$/');
 });
 
@@ -70,7 +70,7 @@ it ('can be configured to have a custom suffix', function () {
     $id = nano_id();
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(28)
+        ->and(strlen($id))->toBe(config('nano-id.size'))
         ->and($id)->toMatch('/^[a-zA-Z0-9_-]+-suffix$/');
 });
 
@@ -80,7 +80,7 @@ it ('can be configured to have a custom prefix and suffix', function () {
     $id = nano_id();
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(35)
+        ->and(strlen($id))->toBe(config('nano-id.size'))
         ->and($id)->toMatch('/^prefix-[a-zA-Z0-9_-]+-suffix$/');
 });
 
@@ -92,7 +92,7 @@ it ('can be configured to use a custom validator', function () {
         }
     };
 
-    $generator = new NanoId(validator: $validator);
+    $generator = new NanoID(validator: $validator);
     $id = $generator->generate(3, 'abc');
 
     expect($id)->toBe('abc');
@@ -105,16 +105,16 @@ it ('can set a validator using a fluent interface', function () {
             return $id === 'abc';
         }
     };
-    $id = \Fanmade\NanoId\Facades\NanoId::validator($validator)->generate(3, 'abc');
+    $id = \Fanmade\NanoId\Facades\NanoID::validator($validator)->generate(3, 'abc');
 
     expect($id)->toBe('abc');
 });
 
-it('will check for an invalid length', function () {$generator = new NanoId();
+it('will check for an invalid length', function () {$generator = new NanoID();
     $id = $generator->generate(0);
 
     expect($id)->toBeString()
-        ->and(strlen($id))->toBe(21);
+        ->and(strlen($id))->toBe(config('nano-id.size'));
 });
 
 it('will check for an invalid prefix and suffix', function () {
@@ -127,7 +127,7 @@ it('will check for an invalid prefix and suffix', function () {
 );
 
 it ('can be cast to a string', function () {
-    $generator = new NanoId();
+    $generator = new NanoID();
     $id = (string) $generator;
 
     expect($id)->toBeString()

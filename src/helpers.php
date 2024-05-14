@@ -1,10 +1,10 @@
 <?php
 
-use Fanmade\NanoId\Facades\NanoId;
+use Fanmade\NanoId\Facades\NanoID;
 
 if (!function_exists('nano_id')) {
     function nano_id(?int $length = null, string $alphabet = null): string
     {
-        return NanoId::generate($length, $alphabet);
+        return NanoID::generate($length, $alphabet);
     }
 }

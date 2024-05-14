@@ -8,7 +8,7 @@ use Fanmade\NanoId\Contracts\ValidatorInterface;
 use Fanmade\NanoId\Exceptions\NanoIDException;
 use Stringable;
 
-class NanoId implements Stringable
+class NanoID implements Stringable
 {
     private GeneratorInterface $generator;
     private int $size;

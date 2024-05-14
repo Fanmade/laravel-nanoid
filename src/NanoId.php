@@ -5,8 +5,10 @@ namespace Fanmade\NanoId;
 
 use Fanmade\NanoId\Contracts\GeneratorInterface;
 use Fanmade\NanoId\Contracts\ValidatorInterface;
+use Fanmade\NanoId\Exceptions\NanoIDException;
+use Stringable;
 
-class NanoId
+class NanoId implements Stringable
 {
     private GeneratorInterface $generator;
     private int $size;
@@ -33,6 +35,9 @@ class NanoId
         $step = (int) ceil(1.6 * $mask * $length / $alphabetLength);
         $prefix = config('nano-id.prefix', '');
         $suffix = config('nano-id.suffix', '');
+        if (strlen("$prefix$suffix") >= $length) {
+            throw NanoIdException::prefixSuffixTooLong($length, $prefix, $suffix);
+        }
 
         $nanoId = '';
         while (true) {
@@ -62,5 +67,10 @@ class NanoId
         $this->validator = $validator;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->generate();
     }
 }

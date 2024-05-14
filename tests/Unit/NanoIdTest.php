@@ -109,3 +109,27 @@ it ('can set a validator using a fluent interface', function () {
 
     expect($id)->toBe('abc');
 });
+
+it('will check for an invalid length', function () {$generator = new NanoId();
+    $id = $generator->generate(0);
+
+    expect($id)->toBeString()
+        ->and(strlen($id))->toBe(21);
+});
+
+it('will check for an invalid prefix and suffix', function () {
+    config()->set('nano-id.prefix', 'prefix-');
+    config()->set('nano-id.suffix', '-suffix');
+    nano_id(10);
+})->throws(
+    \Fanmade\NanoId\Exceptions\NanoIDException::class,
+    'The combined length of the prefix and suffix is longer than the requested length.'
+);
+
+it ('can be cast to a string', function () {
+    $generator = new NanoId();
+    $id = (string) $generator;
+
+    expect($id)->toBeString()
+        ->and(strlen($id))->toBe(21);
+});

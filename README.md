@@ -29,7 +29,7 @@ Nano IDs are 21 characters long by default and can be customized to be longer or
   - Suffix
   - Alphabet
   - Size
-  - Random function
+  - Random string generator
   - More to come
 - Easily extensible with custom validation rules (like uniqueness or swear word checks)
 
@@ -74,7 +74,7 @@ php artisan vendor:publish --tag=nanoid-config
 | `suffix`                   | An optional suffix which will be added to the Nano ID                 | `''`                                                                       |
 | `alphabet`                 | The alphabet to use for generating the Nano ID                        | `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_`+<br/>`abcdefghijklmnopqrstuvwxyz-` |
 | `size`                     | The default size/length of the Nano ID                                | `21`                                                                       |
-| `generator`                | The generator class to use for generating random bytes                | `\Hidehalo\Nanoid\Generator::class`                                        |
+| `generator`                | The generator class to use for generating random strings              | `\Fanmade\NanoId\Generator\HidehaloStringGenerator`                        |
 | `include_prefix_in_length` | Controls if the prefix is included or excluded in the size limitation | true                                                                       |
 | `include_suffix_in_length` | Controls if the suffix is included or excluded in the size limitation | true                                                                       |
 

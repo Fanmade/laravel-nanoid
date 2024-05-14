@@ -1,6 +1,6 @@
 # Laravel NanoID
 
-<p align="center"><img src="/art/laravel-nano-id-logo.png" alt="Laravel Nano ID Logo" width="400"></p>
+<p align="center"><img src="/art/laravel-nano-id-logo.png" alt="Laravel Nano ID Logo" width="800"></p>
 
 ## Introduction
 A simple package to generate Nano IDs in Laravel.
@@ -52,15 +52,15 @@ Publish the configuration file
 php artisan vendor:publish --tag=nanoid-config
 ```
 
-| Option                     | Description                                                           | Default                                                            |
-|----------------------------|-----------------------------------------------------------------------|--------------------------------------------------------------------|
-| `prefix`                   | An optional prefix which will be added to the Nano ID                 | `''`                                                               |
-| `suffix`                   | An optional suffix which will be added to the Nano ID                 | `''`                                                               |
-| `alphabet`                 | The alphabet to use for generating the Nano ID                        | `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz-` |
-| `size`                     | The default size/length of the Nano ID                                | `21`                                                               |
-| `generator`                | The generator class to use for generating random bytes                | `\Fanmade\NanoId\Generator::class`                                 |
-| `include_prefix_in_length` | Controls if the prefix is included or excluded in the size limitation | true                                                               |
-| `include_suffix_in_length` | Controls if the suffix is included or excluded in the size limitation | true                                                               |
+| Option                     | Description                                                           | Default                                                                    |
+|----------------------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `prefix`                   | An optional prefix which will be added to the Nano ID                 | `''`                                                                       |
+| `suffix`                   | An optional suffix which will be added to the Nano ID                 | `''`                                                                       |
+| `alphabet`                 | The alphabet to use for generating the Nano ID                        | `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_`+<br/>`abcdefghijklmnopqrstuvwxyz-` |
+| `size`                     | The default size/length of the Nano ID                                | `21`                                                                       |
+| `generator`                | The generator class to use for generating random bytes                | `\Fanmade\NanoId\Generator::class`                                         |
+| `include_prefix_in_length` | Controls if the prefix is included or excluded in the size limitation | true                                                                       |
+| `include_suffix_in_length` | Controls if the suffix is included or excluded in the size limitation | true                                                                       |
 
 ## Testing
 

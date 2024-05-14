@@ -41,7 +41,8 @@
         "test": "vendor/bin/pest",
         "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
         "test-coverage-html": "XDEBUG_MODE=coverage vendor/bin/pest --coverage --coverage-html",
-        "test-coverage-clover": "XDEBUG_MODE=coverage vendor/bin/pest --coverage --coverage-clover"
+        "test-coverage-clover": "XDEBUG_MODE=coverage vendor/bin/pest --coverage --coverage-clover",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon.dist"
     },
     "extra": {
         "laravel": {

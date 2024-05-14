@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9ca5c8594b4d610ee79543398e2bbbb",
+    "content-hash": "889a073d01d85b94327757afe67dc9f7",
     "packages": [],
     "packages-dev": [
         {
@@ -3458,12 +3458,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "81693823620bcb1472aef627c9e7b84c2d797caa"
+                "reference": "ba914fa2fb6746331e3e4e433a1d6faffff7d78d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/81693823620bcb1472aef627c9e7b84c2d797caa",
-                "reference": "81693823620bcb1472aef627c9e7b84c2d797caa",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/ba914fa2fb6746331e3e4e433a1d6faffff7d78d",
+                "reference": "ba914fa2fb6746331e3e4e433a1d6faffff7d78d",
                 "shasum": ""
             },
             "require": {
@@ -3491,6 +3491,7 @@
             "extra": {
                 "pest": {
                     "plugins": [
+                        "Pest\\Plugins\\Configuration",
                         "Pest\\Plugins\\Bail",
                         "Pest\\Plugins\\Cache",
                         "Pest\\Plugins\\Coverage",
@@ -3557,7 +3558,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-08T00:24:30+00:00"
+            "time": "2024-05-14T19:28:49+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -4190,16 +4191,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.67",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "16ddbe776f10da6a95ebd25de7c1dbed397dc493"
+                "reference": "666cb1703742cea9cc80fee631f0940e1592fa6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/16ddbe776f10da6a95ebd25de7c1dbed397dc493",
-                "reference": "16ddbe776f10da6a95ebd25de7c1dbed397dc493",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/666cb1703742cea9cc80fee631f0940e1592fa6e",
+                "reference": "666cb1703742cea9cc80fee631f0940e1592fa6e",
                 "shasum": ""
             },
             "require": {
@@ -4244,7 +4245,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-16T07:22:02+00:00"
+            "time": "2024-05-13T06:02:22+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -9806,7 +9807,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "pestphp/pest": 20
+        "pestphp/pest": 20,
+        "pestphp/pest-plugin-laravel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

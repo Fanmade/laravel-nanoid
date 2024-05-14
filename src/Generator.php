@@ -10,6 +10,7 @@ class Generator implements Contracts\GeneratorInterface{
 
     public function random(int $size): array
     {
+        // @phpstan-ignore-next-line
         return unpack('C*', random_bytes($size));
     }
 }

@@ -22,23 +22,23 @@ class NanoID implements Stringable
     )
     {
         $this->generator = $generator ?? app(GeneratorInterface::class);
-        $this->size = $size ?? config('nano-id.size');
+        $this->size = $size ?? (int)config('nano-id.size', 21);
         $this->alphabet = $alphabet ?? config('nano-id.alphabet');
     }
 
     public function generate(int $length = null, string $symbols = null): string
     {
-        $length = (int) $length > 0 ? $length : $this->size;
+        $limit = (int) ($length > 0 ? $length : $this->size);
         $symbols = $symbols ?? $this->alphabet;
         $alphabetLength = strlen($symbols);
         $mask = (2 << (int) log(($alphabetLength - 1) * 6, 2)) - 1;
-        $step = (int) ceil(1.6 * $mask * $length / $alphabetLength);
+        $step = (int) ceil(1.6 * $mask * $limit / $alphabetLength);
         $prefix = config('nano-id.prefix', '');
         $suffix = config('nano-id.suffix', '');
         $prefixLength = config('nano-id.include_prefix_in_length', true) ? strlen($prefix) : 0;
         $suffixLength = config('nano-id.include_suffix_in_length', true) ? strlen($suffix) : 0;
-        if ($prefixLength + $suffixLength >= $length) {
-            throw NanoIdException::prefixSuffixTooLong($length, $prefix, $suffix);
+        if ($prefixLength + $suffixLength >= $limit) {
+            throw NanoIdException::prefixSuffixTooLong($limit, $prefix, $suffix);
         }
 
         $nanoId = '';
@@ -50,7 +50,7 @@ class NanoID implements Stringable
                 }
                 $nanoId .= $symbols[$byte];
 
-                if ((strlen($nanoId) + $prefixLength + $suffixLength) < $length) {
+                if ((strlen($nanoId) + $prefixLength + $suffixLength) < $limit) {
                     continue;
                 }
 

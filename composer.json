@@ -2,7 +2,17 @@
     "name": "fanmade/laravel-nanoid",
     "description": "A small package to add Nano IDs to Laravel",
     "type": "library",
+    "keywords": [
+        "nanoid",
+        "nano-id",
+        "laravel",
+        "laravel-nanoid"
+    ],
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/fanmade/laravel-nanoid/issues",
+        "source": "https://github.com/fanmade/laravel-nanoid"
+    },
     "autoload": {
         "files": [
             "src/helpers.php"
@@ -19,7 +29,7 @@
     "authors": [
         {
             "name": "Ben Reuter",
-            "email": "ben@fanmade.de"
+            "email": "dev@reuterben.de"
         }
     ],
     "prefer-stable": true,
@@ -28,7 +38,10 @@
         "php": "^8.1"
     },
     "scripts": {
-        "test": "vendor/bin/pest"
+        "test": "vendor/bin/pest",
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
+        "test-coverage-html": "XDEBUG_MODE=coverage vendor/bin/pest --coverage --coverage-html",
+        "test-coverage-clover": "XDEBUG_MODE=coverage vendor/bin/pest --coverage --coverage-clover"
     },
     "extra": {
         "laravel": {

@@ -4,7 +4,6 @@ parameters:
         - src
         - tests
     phpVersion: 80400
-    checkMissingIterableValueType: false
     treatPhpDocTypesAsCertain: false
     reportUnmatchedIgnoredErrors: false
     excludePaths:
@@ -14,4 +13,5 @@ parameters:
     editorUrlTitle: '%%relFile%%:%%line%%'
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon

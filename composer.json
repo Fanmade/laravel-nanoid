@@ -58,7 +58,7 @@
         "pestphp/pest": "3.x-dev",
         "pestphp/pest-plugin-laravel": "3.x-dev",
         "phpstan/phpstan": "^1.11",
-        "nunomaduro/larastan": "^2.10"
+        "larastan/larastan": "^2.10"
     },
     "config": {
         "allow-plugins": {

@@ -45,7 +45,7 @@ class NanoIDException extends Exception
         return $this;
     }
 
-    public static function prefixSuffixTooLong(int $length, string $prefix = null, string $suffix = null): self
+    public static function prefixSuffixTooLong(int $length, ?string $prefix = null, ?string $suffix = null): self
     {
         $nanoIDException = new self(
             'The combined length of the prefix and suffix is longer than the requested length.'

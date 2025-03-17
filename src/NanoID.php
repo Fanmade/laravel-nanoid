@@ -17,9 +17,9 @@ class NanoID implements Stringable
     private string $alphabet;
 
     public function __construct(
-        RandomStringGenerator $generator = null,
-        int $size = null,
-        string $alphabet = null,
+        ?RandomStringGenerator $generator = null,
+        ?int $size = null,
+        ?string $alphabet = null,
         private ?ValidatorInterface $validator = null
     )
     {
@@ -28,7 +28,7 @@ class NanoID implements Stringable
         $this->alphabet = $alphabet ?? config('nano-id.alphabet');
     }
 
-    public function generate(int $length = null, ?string $symbols = null): string
+    public function generate(?int $length = null, ?string $symbols = null): string
     {
         $limit = (int) ($length > 0 ? $length : $this->size);
         $prefix = config('nano-id.prefix', '');

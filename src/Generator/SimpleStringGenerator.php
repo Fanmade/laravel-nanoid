@@ -21,7 +21,10 @@ class SimpleStringGenerator implements RandomStringGenerator
         $length = strlen($alphabet);
         $result = '';
         for ($i = 0; $i < $size; $i++) {
-            $result .= $alphabet[random_int(0, $length - 1)];
+            $input = [0, $length - 1];
+            // Sort the input array to prevent random_int() from throwing an error
+            sort($input);
+            $result .= $alphabet[random_int(...$input)];
         }
 
         return $result;

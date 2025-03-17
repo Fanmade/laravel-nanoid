@@ -7,16 +7,21 @@ namespace Fanmade\NanoId\Exceptions;
 use Exception;
 use Throwable;
 
-class NanoIDException extends Exception
+final class NanoIDException extends Exception
 {
     /**
      * @var array<string, int|string>
      */
     private array $context = [];
 
-    public static function createWithContext(string $message, array $context): static
+    /**
+     * @param string $message
+     * @param array<string, int|string> $context
+     * @return \Fanmade\NanoId\Exceptions\NanoIDException
+     */
+    public static function createWithContext(string $message, array $context): NanoIDException
     {
-        $nanoIDException = new static($message);
+        $nanoIDException = new NanoIDException($message);
         $nanoIDException->context = $context;
 
         return $nanoIDException;

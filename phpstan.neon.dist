@@ -3,7 +3,15 @@ parameters:
     paths:
         - src
         - tests
+    phpVersion: 80400
+    checkMissingIterableValueType: false
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false
+    excludePaths:
+        - vendor/*
     parallel:
         maximumNumberOfProcesses: 5
     editorUrlTitle: '%%relFile%%:%%line%%'
     editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
